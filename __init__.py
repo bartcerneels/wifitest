@@ -1,9 +1,11 @@
+import hardware_setup
 
 from gui.core.ugui import Screen, ssd, Window
 
 from gui.widgets.label import Label
 from gui.core.writer import CWriter
 from gui.widgets.menu import Menu
+from gui.widgets.buttons import CloseButton
 
 import uasyncio as asyncio
 
@@ -17,11 +19,13 @@ class MainScreen(Screen):
     def __init__(self):
         super().__init__()
 
-        Label(wri, 100, (ssd.width//2)-(164//2), 'esterierwifi?')
+        CloseButton(wri)
+
+        Label(wri, 100, (ssd.width//2)-(110//2), 'esterierwifi?')
 
         self.wifilbl = Label(wri, ssd.height-14, 10, ssd.width - 12)
-                update = asyncio.create_task(self.update_wifi())
-                self.reg_task(update, on_change=True)
+        update = asyncio.create_task(self.update_wifi())
+        self.reg_task(update, on_change=True)
 
     async def update_wifi(self):
         import wifi
