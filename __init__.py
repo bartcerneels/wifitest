@@ -9,6 +9,8 @@ from gui.widgets.buttons import CloseButton
 
 import uasyncio as asyncio
 
+from fri3d import BADGE
+
 # Font for CWriter
 import gui.fonts.freesans20 as font
 from gui.core.colors import *
@@ -28,8 +30,8 @@ class MainScreen(Screen):
         self.reg_task(update, on_change=True)
 
     async def update_wifi(self):
-        import wifi
-        wifi.do_connect()
+        wifi = BADGE.wifi()
+        wifi.connect()
         while(True):
             self.wifilbl.value('Wi-Fi: {}'.format(wifi.status()))
             await asyncio.sleep(1)
